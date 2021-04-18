@@ -1,0 +1,34 @@
+react - redux for state management:
+
+>> create a store that stores all the states in the whole app (using createStore(data) ===> please read further to understand).
+>> wrap the <App/> around <Provider store={store}>
+>> to access the data in the states, use `data = useSelector(state=>state.data)` where state is the object
+>> cd store/data/data.js, we write 2 sets of code => actions and reducers
+
+1. Actions: These are functions that take data as a paramater and return type
+and data together as an object. 'type' tells what action to perform.
+
+2. Reducers: These are functions that take initial state and an object that contains type and data returned by the action functions. Each action will have a corresponding reducer. This reducer changes the state with the data sent in the object as a parameter.
+
+
+/// action
+#> export function funName (d)=>{return{type: 'do_some_operation',d}} 
+
+/// reducer
+#> const data = (state,action)=>{
+	switch(action.type){
+	case 'do_some_operation':
+		return {...state, state.d:action.d};
+	default:
+		return state;
+	}
+   }
+
+NOTE: 
+* All the action functions need to be exported.
+* Reducer function should not be exported.
+* use combineReducer({data}) and then export it.
+
+To change the states in the front end, use `useDispatch(funName(d))` where funName is the action function and d is the data sent as the parameter.
+
+REF: https://www.digitalocean.com/community/tutorials/how-to-manage-state-in-react-with-redux
